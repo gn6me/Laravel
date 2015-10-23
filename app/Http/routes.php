@@ -26,6 +26,19 @@ Route::get('users', function()
     return View::make('users')->with('users', $users);
 });
 
+Route::get('admin', ['middleware' => 'auth', function() {
+    return view('admin');
+}]);
+
+/*Route::get('admin', function() {
+    if (Auth::check()) {
+        return view('admin');
+    } else {
+        Session::flash('message', "Please Login!");
+        return redirect('auth/login');
+    }
+});*/
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
